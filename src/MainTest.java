@@ -2,6 +2,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class  MainTest {
 
+    private MainTest Main;
+
     @org.junit.jupiter.api.Test
     void parenthesesCheck() {
         assertEquals(true, Main.parenthesesCheck("()"));
