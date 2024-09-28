@@ -2,22 +2,22 @@ public class Main {
 
     // 1. parenthesesCheck
     public static boolean parenthesesCheck(String str) {
-        int balancedParentheses = 0;
+        int balancedP = 0;
 
         for (int i = 0; i < str.length(); i++) {
             char ch = str.charAt(i);
 
             if (ch == '(') {
-                balancedParentheses++;
+                balancedP++;
             } else if (ch == ')') {
-                balancedParentheses--;
+                balancedP--;
             }
 
-            if (balancedParentheses < 0) {
+            if (balancedP < 0) {
                 return false;
             }
         }
-        return balancedParentheses == 0;
+        return balancedP == 0;
     }
 
     // 2. reverseInteger
