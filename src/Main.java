@@ -1,26 +1,24 @@
 public class Main {
 
     // 1. parenthesesCheck
-public static boolean parenthesesCheck(String str){
-    int numLeftParentheses = 0;
-    int numRightParentheses = 0;
-    int check = Math.abs(numLeftParentheses - numRightParentheses);
-    for (int i = 0; i < str.length(); i++){
-        if (check < 0){
-            return false;
+    public static boolean parenthesesCheck(String str) {
+        int balancedParentheses = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+
+            if (ch == '(') {
+                balancedParentheses++;
+            } else if (ch == ')') {
+                balancedParentheses--;
+            }
+
+            if (balancedParentheses < 0) {
+                return false;
+            }
         }
-        if (str.charAt(i) == '('){
-            numLeftParentheses++;
-        }
-        if (str.charAt(i) == ')'){
-            numRightParentheses++;
-        }
+        return balancedParentheses == 0;
     }
-    if (check == 0){
-        return true;
-    }
-    return false;
-}
 
     // 2. reverseInteger
     public static String reverseInteger(int n) {
@@ -66,26 +64,36 @@ public static boolean parenthesesCheck(String str){
         }
         return encrypted;
         }
-    }
 
     // 4. decipherThis
-    public static String decipherThis (String str) {
+    public static String decipherThis(String str) {
         String[] words = str.split(" ");
         String result = "";
 
-        String deciphered = null;
         for (String word : words) {
+            String firstLetterCode = "";
+            String deciphered = "";
 
-            String firstLetterCode = String.valueOf((int) word.charAt(0));
-            deciphered = "";
-
-            if (word.length() > 2) {
-                deciphered = firstLetterCode + word.charAt(word.length() - 1) + word.substring(2, word.length() - 1) + word.charAt(1);
-            } else if (word.length() == 2) {
-                deciphered = firstLetterCode + word.charAt(1);
-            } else {
-                deciphered = firstLetterCode;
+            for (int i = 0; i < word.length() && Character.isDigit(word.charAt(i)); i++) {
+                firstLetterCode += word.charAt(i);
             }
+
+            char firstLetter = (char) Integer.parseInt(firstLetterCode);
+
+            deciphered += firstLetter;
+
+            String restOfWord = word.substring(firstLetterCode.length());
+            if (restOfWord.length() > 1) {
+                deciphered += restOfWord.charAt(restOfWord.length() - 1);
+                deciphered += restOfWord.substring(1, restOfWord.length() - 1);
+                deciphered += restOfWord.charAt(0);
+            } else {
+                deciphered += restOfWord;
+            }
+            result += deciphered + " ";
         }
-        return deciphered;
-    }
+
+        return result.trim() ;
+}
+}
+
